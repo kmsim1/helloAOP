@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	<!-- annotation 기능 활성화하기 위해 필요한 코드  -->
+	<context:annotation-config></context:annotation-config>
+
+	<!-- 클래스 bean -->
+	<!-- Setter를 통한 Dog의 myName 주입하기 위해 property 사용 -->
+	<!-- Annotation 사용을 하기 위해 qualifier 설정 -->
+	<bean id="dog" class="kr.ac.hansung.spring.di.Dog">
+		<property name="myName" value="poodle"></property>
+		<qualifier value="qf_dog"></qualifier>
+	</bean>
+
+	<bean id="cat" class="kr.ac.hansung.spring.di.Cat">
+		<property name="myName" value="bella"></property>
+		<qualifier value="qf_cat"></qualifier>
+	</bean>
+
+
+	<bean id="petOwner" class="kr.ac.hansung.spring.di.PetOwner">
+		
+		<!-- 생성자를 통한 주입 -->
+		<!--
+		<constructor-arg ref="cat"></constructor-arg>
+		 -->
+	</bean>
+	
+	
+</beans>
+
+<!-- ctrl+space   : 자동완성
+ 	     +shift+f : 자동 들여쓰기
+ 	     +shift+o : 자동 import
+-->
