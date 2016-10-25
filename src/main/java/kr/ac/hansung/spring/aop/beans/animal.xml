@@ -2,37 +2,51 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-	<!-- annotation 기능 활성화하기 위해 필요한 코드  -->
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	<!-- annotation 기능 활성화하기 위해 필요한 코드 -->
 	<context:annotation-config></context:annotation-config>
 
 	<!-- 클래스 bean -->
 	<!-- Setter를 통한 Dog의 myName 주입하기 위해 property 사용 -->
 	<!-- Annotation 사용을 하기 위해 qualifier 설정 -->
-	<bean id="dog" class="kr.ac.hansung.spring.di.Dog">
+	<bean id="dog" class="kr.ac.hansung.spring.aop.Dog">
 		<property name="myName" value="poodle"></property>
 		<qualifier value="qf_dog"></qualifier>
 	</bean>
 
-	<bean id="cat" class="kr.ac.hansung.spring.di.Cat">
+	<bean id="cat" class="kr.ac.hansung.spring.aop.Cat">
 		<property name="myName" value="bella"></property>
 		<qualifier value="qf_cat"></qualifier>
 	</bean>
 
 
-	<bean id="petOwner" class="kr.ac.hansung.spring.di.PetOwner">
-		
+	<bean id="petOwner" class="kr.ac.hansung.spring.aop.PetOwner">
+
 		<!-- 생성자를 통한 주입 -->
-		<!--
-		<constructor-arg ref="cat"></constructor-arg>
-		 -->
+		<!-- <constructor-arg ref="cat"></constructor-arg> -->
 	</bean>
+
+	<!-- aop를 구현하기 위한 Logger클래스를 bean으로 등록 -->
+	<bean id="logger" class="kr.ac.hansung.spring.aop.Logger"></bean>
+
+	<!-- Aspect를 만들고 안에다가 Pointcut, advice를 넣어줘야함 -->
+	<!-- <aop:config>
+		Aspect logger 등록
+		<aop:aspect ref="logger" id="myAspect">
+			Pointcut 등록, JointPoint 지정( sound() )
+			<aop:pointcut expression="execution(void kr.ac.hansung.spring.aop.*.sound())"
+				id="selectSound" />
+			<JointPoint>selectSound( sound() )가 실행되기 전에 before advice(aboutToSound()가 실행)
+			<aop:before method="aboutToSound"
+				pointcut-ref="selectSound" />
+		</aop:aspect>
+	</aop:config> -->
 	
-	
+	<!--  aspectj Annotaion을 사용 하기위해 선언 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
 
-<!-- ctrl+space   : 자동완성
- 	     +shift+f : 자동 들여쓰기
- 	     +shift+o : 자동 import
--->
+<!-- ctrl+space : 자동완성 +shift+f : 자동 들여쓰기 +shift+o : 자동 import -->

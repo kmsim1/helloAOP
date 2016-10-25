@@ -1,9 +1,7 @@
-package kr.ac.hansung.spring.di;
+package kr.ac.hansung.spring.aop;
 /*
- * 루즈 커플링을 위한
- * Dependency Injection 두가지 방법
- * 1. Setter를 통해서
- * 2. Constructor를 통해서
+ * Target : 클래스
+ * JointPoint : 해당 메소드
  */
 public class Dog implements AnimalType {
 
@@ -14,6 +12,7 @@ public class Dog implements AnimalType {
 	}
 
 	@Override
+	//JointPoint
 	public void sound() {
 		System.out.println("Dog name : " + myName + " Bow Wow!!!");
 	}

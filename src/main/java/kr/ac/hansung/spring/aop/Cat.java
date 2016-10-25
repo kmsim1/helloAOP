@@ -1,5 +1,8 @@
-package kr.ac.hansung.spring.di;
-
+package kr.ac.hansung.spring.aop;
+/*
+ * Target : 클래스
+ * JointPoint : 해당 메소드
+ */
 public class Cat implements AnimalType {
 
 	private String myName;
@@ -9,6 +12,7 @@ public class Cat implements AnimalType {
 	}
 
 	@Override
+	//JointPoint
 	public void sound() {
 		System.out.println("Cat name : " + myName + " Meow!");
 	}
